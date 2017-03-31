@@ -1,3 +1,0 @@
-/home/jijing/share/exp/algorithm/build/CMakeFiles/edit_cache.dir
-/home/jijing/share/exp/algorithm/build/CMakeFiles/rebuild_cache.dir
-/home/jijing/share/exp/algorithm/build/CMakeFiles/algorithm.dir
