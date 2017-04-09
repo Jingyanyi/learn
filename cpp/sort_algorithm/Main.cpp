@@ -3,6 +3,7 @@
 //
 //
 #include <iostream>
+#include <cstdlib>
 #include "source/Sort.h"
 #include "source/Bubble.h"
 #include "source/Insertion.h"
@@ -13,117 +14,77 @@
 #include "source/Merge.h"
 #include "source/Radix.h"
 
+using namespace std;
+
+double random(double start, double end) {
+    return start + (end - start) * rand() / (RAND_MAX + 1.0);
+}
+
+void print_message(const string message) {
+    std::cout << message << std::endl;
+}
+
+Sort *random_chose_algorithm() {
+    srand(unsigned(time(0)));
+    switch (int(random(0, 8))) {
+        case 0:
+            print_message("random chose bubble sort:");
+            return new Bubble();
+        case 1:
+            print_message("random chose insertion sort:");
+            return new Insertion();
+        case 2:
+            print_message("random chose selection sort:");
+            return new Selection();
+        case 3:
+            print_message("random chose shell sort:");
+            return new Shell();
+        case 4:
+            print_message("random chose heap sort:");
+            return new Heap();
+        case 5:
+            print_message("random chose quick sort:");
+            return new Quick();
+        case 6:
+            print_message("random chose radix sort:");
+            return new Radix();
+        case 7:
+            print_message("random chose merger sort:");
+            return new Merge();
+        default:
+            return NULL;
+    }
+}
+
+void random_run(Sort *sort, int *array, int len) {
+    srand(unsigned(time(NULL)));
+    switch (int(random(0, 2))) {
+        case 0:
+            print_message("after normal sort:");
+            sort->sort(array, len);
+            break;
+        case 1:
+            print_message("after recursive sort:");
+            sort->recursive_sort(array, len);
+            break;
+        default:
+            sort->sort(array, len);
+            break;
+    }
+}
+
 int main() {
-#define RADIX_TEST
-
-#ifdef BUBBLE_TEST
-    //bubble sort test
-    Sort *bubble = new Bubble();
-    int *array_a = new int[10];
-    Sort::generate_array(array_a, 10);
-    Sort::print_array(array_a,10);
-    bubble->sort(array_a, 10);
-    //bubble->recursive_sort(array_a,10);
-    Sort::print_array(array_a,10);
-    delete [] array_a;
-    array_a = NULL;
-    delete bubble;
-    bubble = NULL;
-#endif
-
-#ifdef INSERTION_TEST
-    //insertion sort test
-    Sort *insertion = new Insertion();
-    int *array_b = new int[10];
-    Sort::generate_array(array_b, 10);
-    Sort::print_array(array_b,10);
-    //insertion->sort(array_b, 10);
-    insertion->recursive_sort(array_b, 10);
-    Sort::print_array(array_b,10);
-    delete [] array_b;
-    array_b = NULL;
-    delete insertion;
-    insertion = NULL;
-#endif
-
-#ifdef SELECTION_TEST
-    Sort *selection = new Selection();
-    int *array_c = new int[10];
-    Sort::generate_array(array_c, 10);
-    Sort::print_array(array_c,10);
-    selection->sort(array_c, 10);
-    Sort::print_array(array_c,10);
-    delete [] array_c;
-    array_c = NULL;
-    delete selection;
-    selection = NULL;
-#endif
-
-#ifdef SHELL_TEST
-    Sort *shell = new Shell();
-    int *array_d = new int[10];
-    Sort::generate_array(array_d, 10);
-    Sort::print_array(array_d, 10);
-    //shell->sort(array_d,10);
-    shell->recursive_sort(array_d, 10);
-    Sort::print_array(array_d, 10);
-    delete[] array_d;
-    array_d = NULL;
-    delete shell;
-    shell = NULL;
-#endif
-#ifdef QUICK_TEST
-    Sort *quick = new Quick();
-    int *array_e = new int[10];
-    Sort::generate_array(array_e, 10);
-    Sort::print_array(array_e, 10);
-    quick->sort(array_e,10);
-    //quick->recursive_sort(array_e, 10);
-    Sort::print_array(array_e, 10);
-    delete[] array_e;
-    array_e = NULL;
-    delete quick;
-    quick = NULL;
-#endif
-#ifdef HEAP_TEST
-    Heap *heap = new Heap();
-    int *array_f = new int[10];
-    Sort::generate_array(array_f, 10);
-    Sort::print_array(array_f, 10);
-    heap->sort(array_f,10);
-    //heap->recursive_sort(array_f, 10);
-    Sort::print_array(array_f, 10);
-    delete[] array_f;
-    array_f = NULL;
-    delete heap;
-    heap = NULL;
-#endif
-
-#ifdef MERGE_TEST
-    Merge *merge = new Merge();
-    int *array_g = new int[10];
-    Sort::generate_array(array_g, 10);
-    Sort::print_array(array_g, 10);
-    merge->sort(array_g,10);
-    //merge->recursive_sort(array_g, 10);
-    Sort::print_array(array_g, 10);
-    delete[] array_g;
-    array_g = NULL;
-    delete merge;
-    merge = NULL;
-#endif
-#ifdef RADIX_TEST
-    Radix *radix = new Radix();
-    int *array_h = new int[10];
-    Sort::generate_array(array_h, 10);
-    Sort::print_array(array_h, 10);
-    radix->sort(array_h,10);
-    //merge->recursive_sort(array_h, 10);
-    Sort::print_array(array_h, 10);
-    delete[] array_h;
-    array_h = NULL;
-    delete radix;
-    radix = NULL;
-#endif
-
+    int *array = new int[10];
+    std::cout<<"random generate array size:" << 10 << std::endl;
+    Sort::generate_array(array, 10);
+    Sort::print_array(array, 10);
+    Sort *sort = random_chose_algorithm();
+    if (sort == NULL)
+        exit(-1);
+    random_run(sort, array, 10);
+    Sort::print_array(array, 10);
+    delete[] array;
+    array = NULL;
+    delete sort;
+    sort = NULL;
 }

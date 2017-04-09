@@ -14,7 +14,7 @@ void Sort::swap(int *x, int *y) {
 
 void Sort::generate_array(int *array, int len) {
     if (array == NULL) {
-        std::cout << "Given arry was null!" << std::endl;
+        std::cout << "Given arry is null!" << std::endl;
     }
     srand((unsigned int) time(0));
     for (int i = 0; i < len; i++) {

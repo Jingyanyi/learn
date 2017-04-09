@@ -35,7 +35,7 @@ void Radix::sort(int *array, int len) {
 }
 
 void Radix::recursive_sort(int *array, int len) {
-
+    std::cout << "not implement yet!!" << std::endl;
 }
 
 int Radix::find_max(int *array, int len) {
