@@ -16,15 +16,30 @@ using namespace std;
 typedef vector<int> vInt;
 
 int main(){
-    cout << "please enter year:" << endl;
     vInt cowNum;
     int n;
+    cout << "please enter years:" << endl;
     while(cin >> n && n !=0){
         if(n <= 4){
             cowNum.push_back(n);
         }else
         {
-            
+            int f1 = 1;
+            int f2 = 2;
+            int f3 = 3;
+            int fn = 0;
+            for(int i = 4; i <= n;i++){
+                fn = f3 + f1;
+                f1 = f2;
+                f2 = f3;
+                f3 = fn;
+            }
+            cowNum.push_back(fn);
         }
+    }
+    cout << "==============================" << endl;
+    vInt::iterator iter = cowNum.begin();
+    for(;iter != cowNum.end();++iter){
+        cout << *iter << endl;
     }
 }
